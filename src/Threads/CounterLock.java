@@ -29,7 +29,7 @@ class F_Synch1{
         Runnable r = new Runnable() {
             @Override
             public void run() {
-                l.lock();
+                l.lock(); // creating a new lock, acquiring a lock
                 try {
                     c.increment();
                         Thread.sleep(3000);
@@ -40,7 +40,7 @@ class F_Synch1{
                     e.printStackTrace();
                 }
                 finally {
-                    l.unlock();
+                    l.unlock(); // release lock in any case
                 }
 
                     //System.out.println(c.getValue() + " " + Thread.currentThread().getName());
@@ -57,6 +57,9 @@ class F_Synch1{
         t1.start();
         t2.start();
         t3.start();
+
+        CounterLock c2 = new CounterLock();
+         new Thread(r, "new").start();
 
 
     }
